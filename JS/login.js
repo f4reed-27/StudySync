@@ -1,48 +1,39 @@
-const login = document.getElementById('login')
+const login = document.getElementById('login');
+const loginEmail = document.getElementById('loginEmail');
+const loginPass = document.getElementById('loginPass');
+const h1 = document.getElementById('h1');
 
+login.addEventListener('click', login2);
 
-login.addEventListener('click', login2)
-
-const loginEmail = document.getElementById('loginEmail')
-const h1 = document.getElementById('h1')
-
-const loginPass = document.getElementById('loginPass')
 function login2() {
     if (loginEmail.value === '' || loginPass.value === '') {
-        alert('empty fields')
+        alert('Empty fields');
+        return;
     }
     console.log(loginEmail.value);
-    Login(loginEmail.value, loginPass.value)
+    Login(loginEmail.value, loginPass.value);
 }
+
 async function Login(email, password) {
-    const user = await fetch('/App/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email,
-            password,
-        }),
+    try {
+        const user = await fetch('https://studysync-backend-da9k.onrender.com/App/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        });
 
-    })
-    if (!user.ok) {
-        alert('Invalid login please check your email or password and register if you have not')
+        if (!user.ok) {
+            alert('Invalid login. Please check your email or password and register if you have not.');
+        } else {
+            const data = await user.json();
+            alert('Successful login');
+            console.log('User data:', data);
+            h1.innerHTML = email;
+        }
+    } catch (err) {
+        console.error('Error logging in:', err);
+        alert('Something went wrong. Try again later.');
     }
-
-    else {
-        const data = await user.json()
-        alert('sucessful login')
-        h1.innerHTML = email
-    }
-
-
-
-
 }
-
-
-
-
-
-
