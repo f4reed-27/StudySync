@@ -3,6 +3,17 @@ const User = require('../Models/User'); // adjust path if needed
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// routes/registerRoute.js
+const express = require('express');
+const RegisterController = require('../Controllers/RegisterController'); // ✅ path must be exact
+const router = express.Router();
+
+router.post('/register', RegisterController.registerUser);
+router.post('/login', RegisterController.login);
+
+module.exports = router;
+
+
 // REGISTER USER
 exports.registerUser = async (req, res) => {
   try {
