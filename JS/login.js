@@ -25,7 +25,7 @@ async function Login(email, password) {
         });
 
         if (!user.ok) {
-            alert('Invalid login. Please check your email or password and register if you have not.');
+            alert('Login in successful.');
         } else {
             const data = await user.json();
             alert('Successful login');

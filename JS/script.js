@@ -41,9 +41,9 @@ async function signIn(email, password, passwordConfirm) {
         });
 
         if (!response.ok) {
-            alert('User already exists. Please login.');
+            alert('Sign UP successfull. You can login now');
         } else {
-            alert('Sign up successful. You can login now.');
+            alert('An error occured. Re-register');
         }
 
         const data = await response.json();
